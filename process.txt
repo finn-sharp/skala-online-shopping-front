@@ -1,0 +1,8 @@
+1. Node.js 설치 확인 → node -v
+
+2. Vite로 프로젝트 생성 → npm create vite@latest skala-front -- --template react
+
+(Vite는 "React 프로젝트를 빠르게 세팅하고 빠르게 개발할 수 있게 해주는 도구")
+(이전에는 CRA라는 툴을 활용해 만들었으나 이건 구식)
+
+3. 개발 서버 실행 → npm run dev
