@@ -1,0 +1,33 @@
+1. CORS 설정
+개발 중 React(예: localhost:3000)에서 Spring Boot(예: localhost:8080)로 요청하면 CORS 에러가 납니다. Spring Boot 쪽에서 @CrossOrigin 또는 WebMvcConfigurer로 허용 오리진을 설정해야 해요.
+
+java
+@Configuration
+public class CorsConfig implements WebMvcConfigurer {
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+                .allowedOrigins("http://localhost:3000")
+                .allowedMethods("GET", "POST", "PUT", "DELETE");
+    }
+}
+
+2. 개발 시 프록시 설정
+CRA나 Vite 기준으로 package.json에 "proxy": "http://localhost:8080"을 걸어두면 CORS 신경 안 쓰고 /api/...로 바로 호출 가능합니다.
+
+3. 배포 방식 선택
+
+완전 분리 배포: React는 정적 호스팅(S3, Vercel, Nginx 등), Spring Boot는 별도 서버 — 규모 커질수록 유리
+Spring Boot에 빌드 결과물 포함: npm run build 결과를 src/main/resources/static에 넣어서 Spring Boot 하나로 서빙 — 소규모 프로젝트면 간단함
+
+4. 인증 방식
+분리된 구조면 세션 기반보다 JWT 같은 토큰 기반 인증이 더 잘 맞는 경우가 많아요 (stateless).
+
+5. API 명세 관리
+프론트/백엔드가 나뉘면 API 스펙 어긋나기 쉬우니 Swagger(OpenAPI) 같은 걸로 문서화해두면 편합니다.
+
+==============
+날짜 : 2026-08-08
+오류 내용 : react-router-dom을 skala-front 디렉토리가 아닌 저장소 루트에서 설치하여, 루트에 node_modules/package.json/package-lock.json이 새로 생성됨. 루트에는 .gitignore가 없어 node_modules 전체가 커밋 대상(untracked)으로 잡혀 커밋할 변경 사항이 크게 늘어남.
+해결 내용 : 루트의 node_modules, package.json, package-lock.json 삭제 후 skala-front 디렉토리에서 npm install react-router-dom 재실행하여 정상적으로 skala-front/package.json에 의존성 반영.
+==============
