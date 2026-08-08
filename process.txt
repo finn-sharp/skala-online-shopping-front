@@ -6,3 +6,8 @@
 (이전에는 CRA라는 툴을 활용해 만들었으나 이건 구식)
 
 3. 개발 서버 실행 → npm run dev
+
+==============
+날짜 : 2026-08-08
+수행 내용 : react-router-dom 설치 및 BrowserRouter 적용(main.jsx), src/pages 폴더 생성 후 Home, Login, Signup 페이지 컴포넌트 작성(각각 h1로 홈/로그인/회원가입 텍스트 출력)
+=============
